@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quipper CONNECT Hub — Quezon · 4B · Bicol · SY 2026–2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1a5fb4;--blue-bg:#e8f0fb;--blue-dk:#0c447c;
+  --teal:#0f6e56;--teal-bg:#e1f5ee;--teal-dk:#085041;
+  --amber:#ba7517;--amber-bg:#faeeda;--amber-dk:#633806;
+  --coral:#993c1d;--coral-bg:#faece7;--coral-dk:#712b13;
+  --green:#3b6d11;--green-bg:#eaf3de;--green-dk:#27500a;
+  --purple:#534ab7;--navy:#0a2e6e;
+  --bg:#f5f6f8;--white:#fff;
+  --border:#e2e4e8;--border-md:#c8cbd3;
+  --text:#1a1d23;--text-2:#5a5f6e;--text-3:#9198a8;
+  --radius:10px;--radius-lg:14px;
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.site{max-width:1100px;margin:0 auto}
+
+/* TOP BAR */
+.topbar{background:var(--navy);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:100}
+.topbar-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;background:#4a9eff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:12px;color:#fff}
+.logo-text{font-family:'Sora',sans-serif;font-weight:700;font-size:14px;color:#fff;line-height:1.2}
+.logo-sub{font-size:10px;color:#8ab8ff}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-badge{font-size:10px;background:#1a4a9e;color:#8ab8ff;padding:3px 10px;border-radius:20px}
+.topbar-btn{font-size:11px;color:#8ab8ff;cursor:pointer;padding:5px 12px;border:0.5px solid #2a5ab0;border-radius:5px;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
+.topbar-btn:hover{background:#1a4a9e;color:#fff}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:.5px solid var(--border);display:flex;align-items:stretch;overflow-x:auto;padding:0 28px}
+.nav-item{font-size:13px;font-weight:500;padding:14px 18px;cursor:pointer;white-space:nowrap;color:var(--text-2);border-bottom:2.5px solid transparent;transition:all .15s;display:flex;align-items:center;gap:6px}
+.nav-item:hover{color:var(--blue);background:#f5f8ff}
+.nav-item.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
+
+/* PANELS */
+.tab-panel{display:none}.tab-panel.visible{display:block}
+.sub-panel{display:none}.sub-panel.visible{display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1a5fb4 60%,#2a7dd4 100%);padding:44px 32px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50px;right:-50px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero::after{content:'';position:absolute;bottom:-80px;left:35%;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.03)}
+.hero-eye{font-size:10px;font-weight:600;letter-spacing:1.5px;color:#8ab8ff;text-transform:uppercase;margin-bottom:8px}
+.hero-title{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+.hero-sub{font-size:14px;color:#b8d4ff;line-height:1.7;max-width:560px;margin-bottom:24px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero{background:#fff;color:var(--navy);font-weight:600;font-size:13px;padding:11px 22px;border-radius:7px;cursor:pointer;border:none;display:flex;align-items:center;gap:7px;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.btn-hero:hover{background:#e8f0fb;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#fff;font-weight:600;font-size:13px;padding:11px 22px;border-radius:7px;cursor:pointer;border:1.5px solid rgba(255,255,255,.4);display:flex;align-items:center;gap:7px;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.btn-outline:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+
+/* SEARCH */
+.search-bar{background:var(--white);border:.5px solid var(--border-md);border-radius:10px;display:flex;align-items:center;gap:10px;padding:12px 18px;margin:0 28px;margin-top:-20px;box-shadow:0 2px 14px rgba(10,46,110,.12);position:relative;z-index:2}
+.search-bar input{border:none;outline:none;font-size:14px;width:100%;background:transparent;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif}
+.search-bar input::placeholder{color:var(--text-3)}
+
+/* HOME QUICK CARDS */
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:24px 28px 8px}
+.quick-card{background:var(--white);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:18px;cursor:pointer;transition:all .15s;display:flex;align-items:flex-start;gap:14px}
+.quick-card:hover{border-color:var(--border-md);transform:translateY(-2px);box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.qc-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.qc-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.qc-desc{font-size:11.5px;color:var(--text-2);line-height:1.5}
+
+/* ANNOUNCE */
+.announce-section{padding:4px 28px 28px}
+.section-label{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+.announce-card{background:var(--white);border:.5px solid var(--border);border-radius:9px;padding:13px 18px;display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+.announce-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.announce-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.announce-meta{font-size:11px;color:var(--text-3)}
+
+/* SECTION HERO */
+.section-hero{padding:26px 28px 16px;border-bottom:.5px solid var(--border);background:var(--white)}
+.section-eye{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.section-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px}
+.section-sub{font-size:13.5px;color:var(--text-2);line-height:1.6}
+
+/* SUB TABS */
+.subtabs{display:flex;background:var(--white);border-bottom:.5px solid var(--border);padding:0 28px;overflow-x:auto}
+.sub-tab{font-size:12.5px;font-weight:500;padding:11px 16px;cursor:pointer;white-space:nowrap;color:var(--text-2);border-bottom:2px solid transparent;transition:all .15s}
+.sub-tab:hover{color:var(--blue)}
+.sub-tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+.sub-content{padding:22px 28px}
+
+/* EDIT HINT */
+.edit-hint{font-size:11px;color:#7a6010;background:#fffbeb;border:.5px solid #f0d060;border-radius:7px;padding:8px 14px;margin-bottom:16px;line-height:1.6}
+.edit-hint code{background:#fef3c0;padding:1px 5px;border-radius:3px;font-size:10.5px}
+
+/* FAQ */
+.faq-item{background:var(--white);border:.5px solid var(--border);border-radius:9px;margin-bottom:9px;overflow:hidden}
+.faq-q{padding:14px 16px;font-size:13.5px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;color:var(--text);transition:background .1s;line-height:1.4}
+.faq-q:hover{background:#f9f9fb}
+.faq-chev{font-size:11px;color:var(--text-3);flex-shrink:0;margin-top:3px;transition:transform .2s}
+.faq-a{font-size:13px;color:var(--text-2);line-height:1.75;padding:0 16px 14px;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-chev{transform:rotate(180deg)}
+
+/* VIDEO GRID */
+.vid-section-lbl{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;margin:20px 0 12px}
+.vid-section-lbl:first-of-type{margin-top:0}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.video-card{background:var(--white);border:.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .15s}
+.video-card:hover{transform:translateY(-2px);box-shadow:0 4px 18px rgba(0,0,0,.08)}
+.video-thumb{height:140px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.video-play-btn{position:absolute;width:48px;height:48px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--navy);box-shadow:0 2px 12px rgba(0,0,0,.2);transition:transform .15s}
+.video-card:hover .video-play-btn{transform:scale(1.1)}
+.video-info{padding:14px}
+.video-tag{font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:7px}
+.video-title{font-size:13px;font-weight:600;line-height:1.4;color:var(--text);margin-bottom:4px}
+.video-desc{font-size:11.5px;color:var(--text-2);line-height:1.5}
+.video-dur{font-size:10px;color:var(--text-3);margin-top:6px}
+
+/* GUIDE ROWS */
+.guide-list{display:flex;flex-direction:column;gap:10px}
+.guide-row{background:var(--white);border:.5px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;transition:all .15s}
+.guide-row:hover{border-color:var(--border-md);box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.guide-ico{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.guide-info{flex:1;min-width:0}
+.guide-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.guide-meta{font-size:11.5px;color:var(--text-2);line-height:1.5}
+.guide-badge{font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;display:inline-block;margin-top:5px}
+.guide-actions{display:flex;gap:6px;flex-shrink:0}
+.guide-btn{font-size:11.5px;font-weight:600;padding:7px 14px;border-radius:6px;border:none;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;display:inline-block;white-space:nowrap}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:16px}
+.step{display:flex;gap:16px;align-items:flex-start}
+.step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.step-title{font-size:13.5px;font-weight:600;margin-bottom:4px;color:var(--text)}
+.step-body{font-size:12.5px;color:var(--text-2);line-height:1.65}
+
+/* WEBINAR */
+.webinar-card{background:var(--white);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:18px;display:flex;align-items:flex-start;gap:16px;margin-bottom:10px;cursor:pointer;transition:all .15s}
+.webinar-card:hover{transform:translateY(-1px);box-shadow:0 3px 14px rgba(0,0,0,.07)}
+.webinar-thumb{width:120px;height:76px;border-radius:8px;overflow:hidden;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center}
+.webinar-play{position:absolute;width:32px;height:32px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--navy)}
+.webinar-title{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--text);line-height:1.4}
+.webinar-meta{font-size:11.5px;color:var(--text-2);margin-bottom:8px}
+.webinar-pills{display:flex;gap:6px;flex-wrap:wrap}
+.webinar-pill{font-size:9px;padding:2px 9px;border-radius:20px;font-weight:600}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:26px}
+.contact-card{background:var(--white);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:22px;text-align:center}
+.contact-icon{font-size:30px;margin-bottom:10px}
+.contact-title{font-size:14px;font-weight:600;margin-bottom:5px}
+.contact-val{font-size:13px;color:var(--blue);font-weight:500}
+.contact-note{font-size:11px;color:var(--text-3);margin-top:4px}
+.contact-link{display:inline-block;margin-top:12px;font-size:11.5px;font-weight:600;color:var(--blue);text-decoration:none;padding:6px 16px;border:1px solid var(--blue);border-radius:5px;transition:all .15s}
+.contact-link:hover{background:var(--blue);color:#fff}
+.shortcut-row{background:var(--white);border:.5px solid var(--border);border-radius:9px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:7px;cursor:pointer;transition:all .15s}
+.shortcut-row:hover{border-color:var(--border-md);background:#f9f9fb}
+.sc-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.sc-title{font-size:13px;font-weight:500;color:var(--text);flex:1}
+.sc-arrow{font-size:16px;color:var(--text-3)}
+
+/* VIDEO MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--white);border-radius:14px;overflow:hidden;width:100%;max-width:820px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.modal-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--border)}
+.modal-title{font-size:14px;font-weight:600;color:var(--text)}
+.modal-close{width:30px;height:30px;border-radius:50%;border:none;background:var(--bg);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text-2);font-family:'Plus Jakarta Sans',sans-serif}
+.modal-close:hover{background:var(--border)}
+.modal-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
+.modal-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.modal-footer{padding:10px 18px;font-size:11.5px;color:var(--text-3);background:#f9f9fb}
+
+/* PDF MODAL */
+.pdf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.pdf-overlay.open{display:flex}
+.pdf-box{background:var(--white);border-radius:14px;overflow:hidden;width:100%;max-width:860px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.pdf-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--border);flex-shrink:0}
+.pdf-title{font-size:14px;font-weight:600;color:var(--text)}
+.pdf-actions{display:flex;align-items:center;gap:8px}
+.pdf-dl{font-size:11.5px;font-weight:600;color:var(--blue);text-decoration:none;padding:5px 12px;border:1px solid var(--blue);border-radius:5px;transition:all .15s}
+.pdf-dl:hover{background:var(--blue);color:#fff}
+.pdf-embed{flex:1;overflow:hidden}
+.pdf-embed iframe{width:100%;height:100%;border:none;min-height:520px}
+
+/* MOBILE */
+.hamburger-btn{display:none;width:34px;height:34px;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:5px}
+.hbar{height:2px;background:#8ab8ff;border-radius:2px;transition:all .2s}
+.hamburger-btn.open .hbar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger-btn.open .hbar:nth-child(2){opacity:0}
+.hamburger-btn.open .hbar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{background:var(--navy);border-bottom:.5px solid #1a4a9e;display:none;padding:4px 0}
+.mobile-menu.open{display:block}
+.mobile-menu-item{padding:13px 20px;font-size:14px;color:#c8d8f8;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:.5px solid rgba(255,255,255,.07);transition:background .1s}
+.mobile-menu-item:hover,.mobile-menu-item.active{background:#1a4a9e;color:#fff}
+.mobile-menu-item:last-child{border-bottom:none}
+.bottom-nav{display:none;background:var(--white);border-top:.5px solid var(--border);position:sticky;bottom:0;z-index:100;justify-content:space-around;padding:8px 0 12px}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 8px;flex:1}
+.bn-icon{font-size:18px;line-height:1}
+.bn-lbl{font-size:9px;font-weight:500;color:var(--text-2)}
+.bn-item.active .bn-lbl{color:var(--blue);font-weight:600}
+
+@media(max-width:700px){
+  .nav{display:none}
+  .hamburger-btn{display:flex}
+  .bottom-nav{display:flex}
+  .topbar{padding:10px 16px}
+  .hero{padding:22px 16px 32px}
+  .search-bar{margin:0 14px;margin-top:-16px;padding:10px 14px}
+  .home-grid{grid-template-columns:1fr 1fr;padding:16px 14px 8px;gap:10px}
+  .announce-section{padding:4px 14px 20px}
+  .section-hero{padding:16px 14px 12px}
+  .subtabs{padding:0 14px}
+  .sub-content{padding:14px}
+  .video-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .webinar-card{flex-direction:column}
+  .webinar-thumb{width:100%;height:100px}
+  .guide-row{flex-wrap:wrap}
+  .guide-actions{width:100%;justify-content:flex-end;margin-top:6px}
+}
+</style>
+</head>
+<body>
+
+<!-- VIDEO MODAL -->
+<div class="modal-overlay" id="videoModal" onclick="closeVideo(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title" id="vTitle">Video Tutorial</span>
+      <button class="modal-close" onclick="closeVideo()">✕</button>
+    </div>
+    <div class="modal-embed">
+      <iframe id="vFrame" src="" allowfullscreen allow="autoplay"></iframe>
+    </div>
+    <div class="modal-footer" id="vDesc">Quipper CONNECT Hub · Quezon–4B–Bicol · SY 2026–2027</div>
+  </div>
+</div>
+
+<!-- PDF MODAL -->
+<div class="pdf-overlay" id="pdfModal" onclick="closePdf(event)">
+  <div class="pdf-box" onclick="event.stopPropagation()">
+    <div class="pdf-header">
+      <span class="pdf-title" id="pTitle">Document Preview</span>
+      <div class="pdf-actions">
+        <a class="pdf-dl" id="pDlLink" href="#" target="_blank">⬇ Download</a>
+        <button class="modal-close" onclick="closePdf()">✕</button>
+      </div>
+    </div>
+    <div class="pdf-embed">
+      <iframe id="pFrame" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="site">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <div class="logo-mark">QCH</div>
+    <div>
+      <div class="logo-text">Quipper CONNECT Hub</div>
+      <div class="logo-sub">Quezon · 4B · Bicol · SY 2026–2027</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-badge">Official Support Portal</div>
+    <button class="topbar-btn" onclick="showTab('contact')">Contact Us</button>
+    <div class="hamburger-btn" id="hbg" onclick="toggleMenu()">
+      <div class="hbar"></div><div class="hbar"></div><div class="hbar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item active" id="mm-home" onclick="showTab('home')">🏠 Home</div>
+  <div class="mobile-menu-item" id="mm-teacher" onclick="showTab('teacher')">👩‍🏫 Teacher Support</div>
+  <div class="mobile-menu-item" id="mm-student" onclick="showTab('student')">🎓 Student Support</div>
+  <div class="mobile-menu-item" id="mm-webinar" onclick="showTab('webinar')">🎬 Webinar Recordings</div>
+  <div class="mobile-menu-item" id="mm-downloads" onclick="showTab('downloads')">📥 Downloads</div>
+  <div class="mobile-menu-item" id="mm-contact" onclick="showTab('contact')">📞 Contact &amp; Help</div>
+</div>
+
+<!-- DESKTOP NAV -->
+<div class="nav">
+  <div class="nav-item active" id="nav-home" onclick="showTab('home')">🏠 Home</div>
+  <div class="nav-item" id="nav-teacher" onclick="showTab('teacher')">👩‍🏫 Teacher Support</div>
+  <div class="nav-item" id="nav-student" onclick="showTab('student')">🎓 Student Support</div>
+  <div class="nav-item" id="nav-webinar" onclick="showTab('webinar')">🎬 Webinar Recordings</div>
+  <div class="nav-item" id="nav-downloads" onclick="showTab('downloads')">📥 Downloads</div>
+  <div class="nav-item" id="nav-contact" onclick="showTab('contact')">📞 Contact &amp; Help</div>
+</div>
+
+<!-- ══════ HOME ══════ -->
+<div id="tab-home" class="tab-panel visible">
+  <div class="hero">
+    <div class="hero-eye">School Year 2026–2027 · Official Support Portal</div>
+    <!-- ✏️ EDIT: Update the title and subtitle -->
+    <div class="hero-title">Welcome to the Quipper<br>CONNECT Hub</div>
+    <div class="hero-sub">Your centralized, 24/7 resource for Quipper tools — FAQs, video tutorials, account setup, and troubleshooting for all schools in the Quezon–4B–Bicol area.</div>
+    <div class="hero-btns">
+      <button class="btn-hero" onclick="showTab('teacher')">👩‍🏫 I'm a Teacher</button>
+      <button class="btn-outline" onclick="showTab('student')">🎓 I'm a Student</button>
+    </div>
+  </div>
+  <div class="search-bar">
+    <span style="font-size:16px;color:var(--text-3)">🔍</span>
+    <input type="text" placeholder="Search FAQs, guides, tutorials… e.g. 'reset password', 'create class'"/>
+  </div>
+  <div class="home-grid">
+    <div class="quick-card" onclick="showTab('teacher');showSub('t','t-faq',0)">
+      <div class="qc-icon" style="background:var(--blue-bg)">❓</div>
+      <div><div class="qc-label">Teacher FAQs</div><div class="qc-desc">Login, class setup, assignments, progress monitoring</div></div>
+    </div>
+    <div class="quick-card" onclick="showTab('teacher');showSub('t','t-videos',1)">
+      <div class="qc-icon" style="background:var(--teal-bg)">🎥</div>
+      <div><div class="qc-label">Video Tutorials</div><div class="qc-desc">QLink, QCreate, QEssay step-by-step guides</div></div>
+    </div>
+    <div class="quick-card" onclick="showTab('student');showSub('s','s-faq',0)">
+      <div class="qc-icon" style="background:var(--amber-bg)">🎓</div>
+      <div><div class="qc-label">Student FAQs</div><div class="qc-desc">How to join classes, answer tasks &amp; check grades</div></div>
+    </div>
+    <div class="quick-card" onclick="showTab('downloads')">
+      <div class="qc-icon" style="background:var(--green-bg)">📥</div>
+      <div><div class="qc-label">Downloads</div><div class="qc-desc">PDF manuals and quick reference guides</div></div>
+    </div>
+  </div>
+  <div class="announce-section">
+    <div class="section-label">Announcements &amp; Updates</div>
+    <!-- ✏️ EDIT: Add/update announcements. Copy any card block to add more. -->
+    <div class="announce-card"><div class="announce-dot" style="background:var(--blue)"></div><div><div class="announce-title">SY 2026–2027 Quipper CONNECT Hub is now live!</div><div class="announce-meta">April 2026 · Welcome to all teachers, students, and administrators in the Quezon–4B–Bicol region.</div></div></div>
+    <div class="announce-card"><div class="announce-dot" style="background:var(--teal)"></div><div><div class="announce-title">New QEssay video tutorials now available</div><div class="announce-meta">April 2026 · Learn how to create, review, and score essay assignments.</div></div></div>
+    <div class="announce-card"><div class="announce-dot" style="background:var(--amber)"></div><div><div class="announce-title">Webinar recording: Platform Orientation for Teachers has been uploaded</div><div class="announce-meta">March 2026 · Watch the full recording in the Webinar Recordings section.</div></div></div>
+    <div class="announce-card"><div class="announce-dot" style="background:var(--coral)"></div><div><div class="announce-title">Reminder: Share your class code before assigning activities</div><div class="announce-meta">March 2026 · Find your class code in QLink → Class Settings.</div></div></div>
+  </div>
+</div>
+
+<!-- ══════ TEACHER SUPPORT ══════ -->
+<div id="tab-teacher" class="tab-panel">
+  <div class="section-hero">
+    <div class="section-eye" style="color:var(--blue)">Teacher Support</div>
+    <div class="section-title">Resources for Educators</div>
+    <div class="section-sub">Everything you need to set up, manage, and make the most of Quipper in your classroom — available 24/7.</div>
+  </div>
+  <div class="subtabs" id="t-subtabs">
+    <div class="sub-tab active" onclick="showSub('t','t-faq',0)">FAQs</div>
+    <div class="sub-tab" onclick="showSub('t','t-videos',1)">Video Tutorials</div>
+    <div class="sub-tab" onclick="showSub('t','t-setup',2)">Account Setup</div>
+    <div class="sub-tab" onclick="showSub('t','t-trouble',3)">Troubleshooting</div>
+  </div>
+  <div class="sub-content">
+
+    <!-- TEACHER FAQs -->
+    <div id="t-faq" class="t-sub sub-panel visible">
+      <div class="edit-hint">✏️ <strong>How to edit:</strong> Click any question to test it. To add a new FAQ, copy one <code>&lt;div class="faq-item"&gt;...&lt;/div&gt;</code> block and update the question and answer text inside.</div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I log in to my Quipper account? <span class="faq-chev">▼</span></div><div class="faq-a">Go to <strong>quipper.com/ph</strong> and click <em>"Log In."</em> Enter your registered email and password. If you haven't received credentials, contact your school administrator or CSO.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I reset my password? <span class="faq-chev">▼</span></div><div class="faq-a">On the login page, click <em>"Forgot Password."</em> Enter your registered email — a reset link will be sent to your inbox. Check spam if it doesn't arrive within 5 minutes.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I create a class in QLink? <span class="faq-chev">▼</span></div><div class="faq-a">Log in to QLink and click <em>"+ Create Class."</em> Fill in the class name, subject, grade level, and school year. Once saved, a class code is generated — share it with students to enroll.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Why can't my students access my assignments? <span class="faq-chev">▼</span></div><div class="faq-a">Check: (1) Assignment is <strong>published</strong>, not a draft. (2) Due date and open date are correct. (3) Students are enrolled using your class code. (4) No restricted access schedule is blocking them.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I view student progress and scores? <span class="faq-chev">▼</span></div><div class="faq-a">In QLink, open your class and click the <em>"Progress"</em> tab. You'll see completion rates, scores, and time-on-task per student per activity. Reports can also be exported.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I assign activities to students? <span class="faq-chev">▼</span></div><div class="faq-a">Inside your class in QLink, click <em>"+ Assign."</em> Choose from the Quipper content library or your QCreate materials. Set the schedule and due date, then click <em>"Publish."</em></div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I review and score essay submissions? <span class="faq-chev">▼</span></div><div class="faq-a">Go to QEssay and open the assignment. Click a student's name to read their essay. Add written feedback and assign a score, then click <em>"Save"</em> — the student will be notified.</div></div>
+    </div>
+
+    <!-- TEACHER VIDEOS -->
+    <div id="t-videos" class="t-sub sub-panel">
+      <div class="edit-hint">
+        ✏️ <strong>How to insert your Google Drive videos:</strong><br>
+        1. Upload your video to Google Drive.<br>
+        2. Right-click the file → <em>Share</em> → set to <em>"Anyone with the link"</em>.<br>
+        3. Copy the share link. Your File ID is the part between <code>/d/</code> and <code>/view</code>.<br>
+        4. Replace each <code>PASTE_GDRIVE_FILE_ID_HERE</code> below with that ID.<br>
+        Example share link: <code>drive.google.com/file/d/<u>1aBcDeFgHiJkLmNoPqRsTuV</u>/view</code>
+      </div>
+
+      <div class="vid-section-lbl">QLink Tutorials</div>
+      <div class="video-grid">
+
+        <!-- ✏️ VIDEO 1: Replace PASTE_GDRIVE_FILE_ID_HERE and update title/description/duration -->
+        <div class="video-card" onclick="openVideo('How to Navigate QLink','PASTE_GDRIVE_FILE_ID_HERE','Tour the QLink dashboard and learn how to access your classes, assignments, and student data.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#1a5fb4,#2a7dd4)">
+            <div style="font-size:36px">🔗</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--blue-bg);color:var(--blue-dk)">QLink</span>
+            <div class="video-title">How to Navigate QLink</div>
+            <div class="video-desc">Tour the dashboard and find classes, assignments, and tools.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+        <!-- ✏️ VIDEO 2 -->
+        <div class="video-card" onclick="openVideo('Create and Manage Classes','PASTE_GDRIVE_FILE_ID_HERE','Step-by-step guide to creating a new class, setting class details, and managing enrolled students.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#0c447c,#1a5fb4)">
+            <div style="font-size:36px">🏫</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--blue-bg);color:var(--blue-dk)">QLink</span>
+            <div class="video-title">Create and Manage Classes</div>
+            <div class="video-desc">Create classes and generate a class code for students.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+        <!-- ✏️ VIDEO 3 -->
+        <div class="video-card" onclick="openVideo('Assign Activities to Students','PASTE_GDRIVE_FILE_ID_HERE','See how to assign quizzes and activities to your class with schedules and due dates.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#1a5fb4,#0c447c)">
+            <div style="font-size:36px">📋</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--blue-bg);color:var(--blue-dk)">QLink</span>
+            <div class="video-title">Assign Activities to Students</div>
+            <div class="video-desc">Publish assignments with schedules and due dates.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+        <!-- ✏️ VIDEO 4 -->
+        <div class="video-card" onclick="openVideo('Monitor Student Progress','PASTE_GDRIVE_FILE_ID_HERE','Learn how to track student scores, completion rates, and activity history in QLink.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#2a7dd4,#1a5fb4)">
+            <div style="font-size:36px">📊</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--blue-bg);color:var(--blue-dk)">QLink</span>
+            <div class="video-title">Monitor Student Progress</div>
+            <div class="video-desc">View scores and completion rates, export reports.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="vid-section-lbl">QCreate Tutorials</div>
+      <div class="video-grid">
+
+        <!-- ✏️ VIDEO 5 -->
+        <div class="video-card" onclick="openVideo('Create Quizzes and Assignments in QCreate','PASTE_GDRIVE_FILE_ID_HERE','Build your own quizzes and assignments from scratch using the QCreate authoring tool.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#0f6e56,#1a9e7a)">
+            <div style="font-size:36px">📝</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--teal-bg);color:var(--teal-dk)">QCreate</span>
+            <div class="video-title">Create Quizzes and Assignments</div>
+            <div class="video-desc">Build assessments from scratch using QCreate.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+        <!-- ✏️ VIDEO 6 -->
+        <div class="video-card" onclick="openVideo('Add Questions and Answer Keys','PASTE_GDRIVE_FILE_ID_HERE','Guide on adding multiple-choice, enumeration, and other question types with correct answers.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#085041,#0f6e56)">
+            <div style="font-size:36px">✅</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--teal-bg);color:var(--teal-dk)">QCreate</span>
+            <div class="video-title">Add Questions and Answer Keys</div>
+            <div class="video-desc">Add question types with correct answers and point values.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+        <!-- ✏️ VIDEO 7 -->
+        <div class="video-card" onclick="openVideo('Publish Activities in QCreate','PASTE_GDRIVE_FILE_ID_HERE','Steps to review, finalize, and publish your QCreate activities so students can access them.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#1a9e7a,#085041)">
+            <div style="font-size:36px">🚀</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--teal-bg);color:var(--teal-dk)">QCreate</span>
+            <div class="video-title">Publish Activities</div>
+            <div class="video-desc">Review and publish content for student access.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="vid-section-lbl">QEssay Tutorials</div>
+      <div class="video-grid">
+
+        <!-- ✏️ VIDEO 8 -->
+        <div class="video-card" onclick="openVideo('Create Essay Assignments in QEssay','PASTE_GDRIVE_FILE_ID_HERE','Set up essay assignments including prompts, rubrics, word limits, and due dates.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#ba7517,#e69c30)">
+            <div style="font-size:36px">✍️</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--amber-bg);color:var(--amber-dk)">QEssay</span>
+            <div class="video-title">Create Essay Assignments</div>
+            <div class="video-desc">Set up prompts, rubrics, and submission deadlines.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+        <!-- ✏️ VIDEO 9 -->
+        <div class="video-card" onclick="openVideo('Review and Score Essay Submissions','PASTE_GDRIVE_FILE_ID_HERE','How to open, read, provide feedback, and score student essay submissions in QEssay.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#633806,#ba7517)">
+            <div style="font-size:36px">💯</div><div class="video-play-btn">▶</div>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="background:var(--amber-bg);color:var(--amber-dk)">QEssay</span>
+            <div class="video-title">Review and Score Submissions</div>
+            <div class="video-desc">Write feedback, assign points, and release results.</div>
+            <div class="video-dur">⏱ 0:00 min · Replace with actual duration</div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /t-videos -->
+
+    <!-- TEACHER ACCOUNT SETUP -->
+    <div id="t-setup" class="t-sub sub-panel">
+      <div class="edit-hint">✏️ <strong>How to edit:</strong> Update each step's description to match your school or regional setup process.</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:var(--blue-bg);color:var(--blue)">1</div><div><div class="step-title">Create your Quipper teacher account</div><div class="step-body">Visit <strong>quipper.com/ph</strong> and click <em>"Sign Up as Teacher."</em> Use your official school email address. Provide your full name, school name, and subject. Check your email to verify and activate your account.</div></div></div>
+        <div class="step"><div class="step-num" style="background:var(--blue-bg);color:var(--blue)">2</div><div><div class="step-title">Update your profile information</div><div class="step-body">After logging in, click your name at the top-right → <em>"My Profile."</em> Fill in your full name, subject area, grade level, and upload a profile photo. Click <em>"Save Changes"</em> when done.</div></div></div>
+        <div class="step"><div class="step-num" style="background:var(--blue-bg);color:var(--blue)">3</div><div><div class="step-title">Set a secure password</div><div class="step-body">Go to <em>Settings → Security → Change Password.</em> Replace your temporary password with a strong one — at least 8 characters with uppercase, lowercase, numbers, and symbols.</div></div></div>
+        <div class="step"><div class="step-num" style="background:var(--blue-bg);color:var(--blue)">4</div><div><div class="step-title">Link your account to your school</div><div class="step-body">Under <em>Settings → School Information,</em> search for your school by name or DepEd ID. Select your school and confirm to link your account to your institution's subscription.</div></div></div>
+        <div class="step"><div class="step-num" style="background:var(--blue-bg);color:var(--blue)">5</div><div><div class="step-title">Create your first class in QLink</div><div class="step-body">Go to <em>QLink → "+ Create Class."</em> Enter the class name, subject, grade level, and school year. A class code is generated — share this with your students so they can enroll.</div></div></div>
+      </div>
+    </div>
+
+    <!-- TEACHER TROUBLESHOOTING -->
+    <div id="t-trouble" class="t-sub sub-panel">
+      <div class="edit-hint">✏️ <strong>How to edit:</strong> Add new troubleshooting items by copying any <code>&lt;div class="faq-item"&gt;</code> block and editing the question and answer text.</div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">I cannot log in — "Invalid email or password" <span class="faq-chev">▼</span></div><div class="faq-a"><strong>Step 1:</strong> Check for typos in your email (spaces, wrong domain).<br><strong>Step 2:</strong> Click <em>"Forgot Password"</em> to reset via email.<br><strong>Step 3:</strong> Clear browser cache (Chrome: Settings → Privacy → Clear browsing data).<br><strong>Step 4:</strong> Try Google Chrome or an incognito window.<br>If still failing, contact your CSO with your registered email.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">The website loads slowly or won't open <span class="faq-chev">▼</span></div><div class="faq-a"><strong>Step 1:</strong> Check your internet connection — switch networks if possible.<br><strong>Step 2:</strong> Try an Incognito/Private window.<br><strong>Step 3:</strong> Disable browser extensions (especially ad blockers).<br><strong>Step 4:</strong> Update your browser to the latest version. Google Chrome is recommended.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">A student can't find or access my class <span class="faq-chev">▼</span></div><div class="faq-a"><strong>Step 1:</strong> Confirm the student is using the exact class code from QLink → Class Settings.<br><strong>Step 2:</strong> Check the class isn't archived (QLink → My Classes → Archived).<br><strong>Step 3:</strong> Make sure the student is logged in to the correct account.<br><strong>Step 4:</strong> Contact your administrator if the class is completely missing.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Assignment is published but students can't see it <span class="faq-chev">▼</span></div><div class="faq-a"><strong>Step 1:</strong> Confirm status shows <em>"Published"</em> — not Draft.<br><strong>Step 2:</strong> Check the open date — if set in the future, students can't see it yet.<br><strong>Step 3:</strong> Verify students are enrolled in this specific class.<br><strong>Step 4:</strong> Ask students to refresh their Quipper page or log out and back in.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Videos won't play or keep buffering <span class="faq-chev">▼</span></div><div class="faq-a"><strong>Step 1:</strong> Check internet speed — video requires a stable connection.<br><strong>Step 2:</strong> Lower video quality in the player settings.<br><strong>Step 3:</strong> Clear cache and disable extensions.<br><strong>Step 4:</strong> Use Google Chrome on desktop for best video performance.</div></div>
+    </div>
+
+  </div>
+</div><!-- /teacher -->
+
+<!-- ══════ STUDENT SUPPORT ══════ -->
+<div id="tab-student" class="tab-panel">
+  <div class="section-hero">
+    <div class="section-eye" style="color:var(--teal)">Student Support</div>
+    <div class="section-title">Resources for Students</div>
+    <div class="section-sub">Learn how to use Quipper — access your lessons, complete assignments, and track your progress.</div>
+  </div>
+  <div class="subtabs" id="s-subtabs">
+    <div class="sub-tab active" onclick="showSub('s','s-faq',0)">FAQs</div>
+    <div class="sub-tab" onclick="showSub('s','s-videos',1)">Video Tutorials</div>
+    <div class="sub-tab" onclick="showSub('s','s-guides',2)">Quick Guides</div>
+  </div>
+  <div class="sub-content">
+
+    <!-- STUDENT FAQs -->
+    <div id="s-faq" class="s-sub sub-panel visible">
+      <div class="edit-hint">✏️ <strong>How to edit:</strong> Update the questions and answers below. Copy any <code>&lt;div class="faq-item"&gt;</code> block to add more FAQ entries.</div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I log in to my student account? <span class="faq-chev">▼</span></div><div class="faq-a">Go to <strong>quipper.com/ph</strong> and click <em>"Log In."</em> Enter the email and password your teacher gave you. If you forgot your password, ask your teacher — students cannot reset passwords on their own.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I join my teacher's class? <span class="faq-chev">▼</span></div><div class="faq-a">After logging in, click <em>"Join a Class"</em> on your dashboard. Enter the <strong>class code</strong> given by your teacher (e.g., ABC123). The class will appear on your dashboard right away.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I answer an assignment or quiz? <span class="faq-chev">▼</span></div><div class="faq-a">Open your class, then click the assignment from the list. Answer each question carefully, then click <em>"Submit."</em> <strong>Do not close the browser</strong> before submitting or your answers may not be saved.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I know if my work was submitted? <span class="faq-chev">▼</span></div><div class="faq-a">A <em>"Submitted"</em> confirmation screen appears after you click Submit. You can also check under <strong>"Completed Activities"</strong> — it will show your score or a "Submitted" status.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I submit an essay assignment? <span class="faq-chev">▼</span></div><div class="faq-a">Open the essay assignment, type your response in the text box, review your answer, then click <em>"Submit."</em> Your teacher will read it and provide feedback and a score.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I check my score on a completed activity? <span class="faq-chev">▼</span></div><div class="faq-a">Go to your class and click the <em>"Completed"</em> tab. Find and click the activity to see your score and correct answers (if your teacher enabled this). For essays, wait for your teacher to grade and release the score.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">I have overdue activities — can I still submit? <span class="faq-chev">▼</span></div><div class="faq-a">Activities marked <em>"Overdue"</em> are past their due date. Whether you can still submit depends on your teacher. Contact your teacher directly to ask for an extension.</div></div>
+    </div>
+
+    <!-- STUDENT VIDEOS -->
+    <div id="s-videos" class="s-sub sub-panel">
+      <div class="edit-hint">✏️ <strong>How to insert videos:</strong> Replace each <code>PASTE_GDRIVE_FILE_ID_HERE</code> with your Google Drive video file ID. Make sure sharing is set to <em>"Anyone with the link."</em></div>
+      <div class="video-grid">
+
+        <!-- ✏️ Student Video 1 -->
+        <div class="video-card" onclick="openVideo('How to Set Up Your Student Profile','PASTE_GDRIVE_FILE_ID_HERE','Update your profile photo, name, and account settings in your Quipper student account.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#0f6e56,#1a9e7a)"><div style="font-size:36px">👤</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--teal-bg);color:var(--teal-dk)">Profile</span><div class="video-title">Set Up and Update Your Profile</div><div class="video-desc">Update your photo, name, and account settings.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+        <!-- ✏️ Student Video 2 -->
+        <div class="video-card" onclick="openVideo('Access Study Guides and Digital Books','PASTE_GDRIVE_FILE_ID_HERE','Find and read Quipper study guides, lessons, and digital textbooks for your subjects.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#085041,#0f6e56)"><div style="font-size:36px">📚</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--teal-bg);color:var(--teal-dk)">Content</span><div class="video-title">Access Study Guides and Digital Books</div><div class="video-desc">Find and read subject materials and lessons.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+        <!-- ✏️ Student Video 3 -->
+        <div class="video-card" onclick="openVideo('How to Answer Assignments and Quizzes','PASTE_GDRIVE_FILE_ID_HERE','Walkthrough on opening, answering, and submitting Quipper assignments and quizzes.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#1a9e7a,#0f6e56)"><div style="font-size:36px">📝</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--teal-bg);color:var(--teal-dk)">Tasks</span><div class="video-title">Answer Assignments and Quizzes</div><div class="video-desc">Open, answer, and submit your tasks correctly.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+        <!-- ✏️ Student Video 4 -->
+        <div class="video-card" onclick="openVideo('How to Submit Essay Assignments','PASTE_GDRIVE_FILE_ID_HERE','Open an essay task, type your response, review it, and submit to your teacher.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#ba7517,#e69c30)"><div style="font-size:36px">✍️</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--amber-bg);color:var(--amber-dk)">Essay</span><div class="video-title">Submit Essay Assignments</div><div class="video-desc">Type, review, and submit your essay responses.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+        <!-- ✏️ Student Video 5 -->
+        <div class="video-card" onclick="openVideo('How to Check Graded Activities','PASTE_GDRIVE_FILE_ID_HERE','View your scores, correct answers, and teacher feedback on completed activities.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#633806,#ba7517)"><div style="font-size:36px">🏆</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--amber-bg);color:var(--amber-dk)">Grades</span><div class="video-title">Check Graded Activities</div><div class="video-desc">View scores and teacher feedback after grading.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+        <!-- ✏️ Student Video 6 -->
+        <div class="video-card" onclick="openVideo('How to Take Timed Exams','PASTE_GDRIVE_FILE_ID_HERE','Steps for opening, answering, and submitting Quipper timed exams before time runs out.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#993c1d,#d45a30)"><div style="font-size:36px">⏰</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--coral-bg);color:var(--coral-dk)">Exams</span><div class="video-title">View and Take Timed Exams</div><div class="video-desc">Tips for completing exams before the timer ends.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+        <!-- ✏️ Student Video 7 -->
+        <div class="video-card" onclick="openVideo('Check Overdue Activities','PASTE_GDRIVE_FILE_ID_HERE','Learn where to find past-due activities and what to do about them.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#712b13,#993c1d)"><div style="font-size:36px">⚠️</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--coral-bg);color:var(--coral-dk)">Overdue</span><div class="video-title">Check Overdue Activities</div><div class="video-desc">Find past-due tasks and request extensions.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+        <!-- ✏️ Student Video 8 -->
+        <div class="video-card" onclick="openVideo('View Completed Activities and History','PASTE_GDRIVE_FILE_ID_HERE','Review your submission history, scores, and performance across all activities.')">
+          <div class="video-thumb" style="background:linear-gradient(135deg,#3b6d11,#5aa01a)"><div style="font-size:36px">📋</div><div class="video-play-btn">▶</div></div>
+          <div class="video-info"><span class="video-tag" style="background:var(--green-bg);color:var(--green-dk)">History</span><div class="video-title">View Completed Activities</div><div class="video-desc">Browse your submission history and performance.</div><div class="video-dur">⏱ 0:00 min · Replace with actual duration</div></div>
+        </div>
+
+      </div>
+    </div><!-- /s-videos -->
+
+    <!-- STUDENT GUIDES -->
+    <div id="s-guides" class="s-sub sub-panel">
+      <div class="edit-hint">✏️ <strong>How to insert PDFs:</strong> Replace each <code>PASTE_GDRIVE_PDF_ID_HERE</code> with your Google Drive PDF file ID. Get the ID from the share link: <code>drive.google.com/file/d/<u>YOUR_ID_HERE</u>/view</code>. Set sharing to <em>"Anyone with the link."</em></div>
+      <div class="guide-list">
+
+        <!-- ✏️ Student PDF 1 — replace PASTE_GDRIVE_PDF_ID_HERE -->
+        <div class="guide-row">
+          <div class="guide-ico" style="background:var(--blue-bg)">📘</div>
+          <div class="guide-info">
+            <div class="guide-title">Student Quick-Start Guide</div>
+            <div class="guide-meta">Step-by-step visual instructions — login, joining a class, and submitting your first activity.</div>
+            <span class="guide-badge" style="background:var(--blue-bg);color:var(--blue-dk)">PDF · Update file size here</span>
+          </div>
+          <div class="guide-actions">
+            <button class="guide-btn" style="background:var(--blue-bg);color:var(--blue)" onclick="openPdf('Student Quick-Start Guide','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+            <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+          </div>
+        </div>
+
+        <!-- ✏️ Student PDF 2 -->
+        <div class="guide-row">
+          <div class="guide-ico" style="background:var(--teal-bg)">📱</div>
+          <div class="guide-info">
+            <div class="guide-title">Mobile Access Manual</div>
+            <div class="guide-meta">Instructions for accessing Quipper on your smartphone or tablet — Android and iOS setup.</div>
+            <span class="guide-badge" style="background:var(--teal-bg);color:var(--teal-dk)">PDF · Update file size here</span>
+          </div>
+          <div class="guide-actions">
+            <button class="guide-btn" style="background:var(--teal-bg);color:var(--teal)" onclick="openPdf('Mobile Access Manual','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+            <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+          </div>
+        </div>
+
+        <!-- ✏️ Student PDF 3 -->
+        <div class="guide-row">
+          <div class="guide-ico" style="background:var(--amber-bg)">💻</div>
+          <div class="guide-info">
+            <div class="guide-title">Desktop Access Manual</div>
+            <div class="guide-meta">How to use Quipper on a laptop or desktop — browser settings and common issues.</div>
+            <span class="guide-badge" style="background:var(--amber-bg);color:var(--amber-dk)">PDF · Update file size here</span>
+          </div>
+          <div class="guide-actions">
+            <button class="guide-btn" style="background:var(--amber-bg);color:var(--amber)" onclick="openPdf('Desktop Access Manual','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+            <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+          </div>
+        </div>
+
+        <!-- ✏️ Student PDF 4 -->
+        <div class="guide-row">
+          <div class="guide-ico" style="background:var(--green-bg)">📝</div>
+          <div class="guide-info">
+            <div class="guide-title">Assignment Submission Guide</div>
+            <div class="guide-meta">Visual walkthrough on how to open, answer, save progress, and submit assignments.</div>
+            <span class="guide-badge" style="background:var(--green-bg);color:var(--green-dk)">PDF · Update file size here</span>
+          </div>
+          <div class="guide-actions">
+            <button class="guide-btn" style="background:var(--green-bg);color:var(--green)" onclick="openPdf('Assignment Submission Guide','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+            <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div><!-- /student -->
+
+<!-- ══════ WEBINAR RECORDINGS ══════ -->
+<div id="tab-webinar" class="tab-panel">
+  <div class="section-hero">
+    <div class="section-eye" style="color:var(--coral)">Webinar Recordings</div>
+    <div class="section-title">Past Training Sessions</div>
+    <div class="section-sub">Watch recordings of regional webinars and platform training sessions for SY 2026–2027.</div>
+  </div>
+  <div class="sub-content">
+    <div class="edit-hint">✏️ <strong>How to add a webinar:</strong> Copy any <code>&lt;div class="webinar-card"&gt;</code> block. Replace <code>PASTE_GDRIVE_FILE_ID_HERE</code> with your video file ID and update the title, date, duration, and topic pills.</div>
+
+    <!-- ✏️ Webinar 1 — replace PASTE_GDRIVE_FILE_ID_HERE -->
+    <div class="webinar-card" onclick="openVideo('Platform Orientation for Teachers — SY 2026–2027','PASTE_GDRIVE_FILE_ID_HERE','Full recording of the regional platform orientation covering QLink, QCreate, and QEssay for Quezon–4B–Bicol teachers.')">
+      <div class="webinar-thumb" style="background:linear-gradient(135deg,#993c1d,#d45a30)"><div style="font-size:28px">🎓</div><div class="webinar-play">▶</div></div>
+      <div>
+        <div class="webinar-title">Platform Orientation for Teachers — SY 2026–2027</div>
+        <div class="webinar-meta">📅 March 2026 · Regional Training · ⏱ Update with actual duration</div>
+        <div class="webinar-pills">
+          <span class="webinar-pill" style="background:var(--blue-bg);color:var(--blue-dk)">QLink</span>
+          <span class="webinar-pill" style="background:var(--teal-bg);color:var(--teal-dk)">QCreate</span>
+          <span class="webinar-pill" style="background:var(--amber-bg);color:var(--amber-dk)">QEssay</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ Webinar 2 — replace PASTE_GDRIVE_FILE_ID_HERE -->
+    <div class="webinar-card" onclick="openVideo('Student Onboarding Walkthrough — Quezon–4B–Bicol','PASTE_GDRIVE_FILE_ID_HERE','Recording of the student onboarding session covering login, joining classes, and submitting activities.')">
+      <div class="webinar-thumb" style="background:linear-gradient(135deg,#1a5fb4,#2a7dd4)"><div style="font-size:28px">🎒</div><div class="webinar-play">▶</div></div>
+      <div>
+        <div class="webinar-title">Student Onboarding Walkthrough — Quezon–4B–Bicol Area</div>
+        <div class="webinar-meta">📅 February 2026 · Student Session · ⏱ Update with actual duration</div>
+        <div class="webinar-pills">
+          <span class="webinar-pill" style="background:var(--teal-bg);color:var(--teal-dk)">Student Features</span>
+          <span class="webinar-pill" style="background:var(--green-bg);color:var(--green-dk)">Account Setup</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ Webinar 3 — replace PASTE_GDRIVE_FILE_ID_HERE -->
+    <div class="webinar-card" onclick="openVideo('QCreate Deep Dive — Building Assessments for Your Class','PASTE_GDRIVE_FILE_ID_HERE','Advanced training focused on building and publishing high-quality assessments using QCreate.')">
+      <div class="webinar-thumb" style="background:linear-gradient(135deg,#0f6e56,#1a9e7a)"><div style="font-size:28px">⚙️</div><div class="webinar-play">▶</div></div>
+      <div>
+        <div class="webinar-title">QCreate Deep Dive — Building Assessments for Your Class</div>
+        <div class="webinar-meta">📅 January 2026 · Advanced Training · ⏱ Update with actual duration</div>
+        <div class="webinar-pills">
+          <span class="webinar-pill" style="background:var(--teal-bg);color:var(--teal-dk)">QCreate</span>
+          <span class="webinar-pill" style="background:var(--amber-bg);color:var(--amber-dk)">Assessment Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ Webinar 4 — replace PASTE_GDRIVE_FILE_ID_HERE -->
+    <div class="webinar-card" onclick="openVideo('School Admin Orientation — Managing Users and Reports','PASTE_GDRIVE_FILE_ID_HERE','Session for school administrators covering user management and generating school-level reports.')">
+      <div class="webinar-thumb" style="background:linear-gradient(135deg,#ba7517,#e69c30)"><div style="font-size:28px">🏫</div><div class="webinar-play">▶</div></div>
+      <div>
+        <div class="webinar-title">School Admin Orientation — Managing Users and Reports</div>
+        <div class="webinar-meta">📅 December 2025 · Admin Session · ⏱ Update with actual duration</div>
+        <div class="webinar-pills">
+          <span class="webinar-pill" style="background:var(--blue-bg);color:var(--blue-dk)">Admin Tools</span>
+          <span class="webinar-pill" style="background:var(--coral-bg);color:var(--coral-dk)">Reports</span>
+          <span class="webinar-pill" style="background:var(--green-bg);color:var(--green-dk)">User Management</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /webinar -->
+
+<!-- ══════ DOWNLOADS ══════ -->
+<div id="tab-downloads" class="tab-panel">
+  <div class="section-hero">
+    <div class="section-eye" style="color:var(--green)">Downloads</div>
+    <div class="section-title">Guides, Manuals &amp; Resources</div>
+    <div class="section-sub">Download official training materials, PDF manuals, and reference guides — organized by role.</div>
+  </div>
+  <div class="sub-content">
+    <div class="edit-hint">✏️ <strong>How to add PDFs:</strong> Replace each <code>PASTE_GDRIVE_PDF_ID_HERE</code> with the file ID from your Google Drive PDF share link. The "Preview" button opens the PDF inline. The "Download" button saves the file. Update the title, description, and file size text as needed.</div>
+
+    <div class="section-label" style="margin-bottom:14px">For Teachers</div>
+    <div class="guide-list" style="margin-bottom:28px">
+
+      <!-- ✏️ Teacher PDF 1 -->
+      <div class="guide-row">
+        <div class="guide-ico" style="background:var(--blue-bg)">📗</div>
+        <div class="guide-info">
+          <div class="guide-title">Teacher Complete Manual — SY 2026–2027</div>
+          <div class="guide-meta">Comprehensive guide covering QLink, QCreate, and QEssay — account setup, class management, and assessment creation.</div>
+          <span class="guide-badge" style="background:var(--blue-bg);color:var(--blue-dk)">PDF · Update file size here</span>
+        </div>
+        <div class="guide-actions">
+          <button class="guide-btn" style="background:var(--blue-bg);color:var(--blue)" onclick="openPdf('Teacher Complete Manual','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+          <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+        </div>
+      </div>
+
+      <!-- ✏️ Teacher PDF 2 -->
+      <div class="guide-row">
+        <div class="guide-ico" style="background:var(--blue-bg)">🗒️</div>
+        <div class="guide-info">
+          <div class="guide-title">Quick Reference Card</div>
+          <div class="guide-meta">A one-page summary of the most important shortcuts, steps, and tips for QLink, QCreate, and QEssay.</div>
+          <span class="guide-badge" style="background:var(--blue-bg);color:var(--blue-dk)">PDF · Update file size here</span>
+        </div>
+        <div class="guide-actions">
+          <button class="guide-btn" style="background:var(--blue-bg);color:var(--blue)" onclick="openPdf('Quick Reference Card','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+          <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+        </div>
+      </div>
+
+      <!-- ✏️ Teacher PDF 3 -->
+      <div class="guide-row">
+        <div class="guide-ico" style="background:var(--amber-bg)">📊</div>
+        <div class="guide-info">
+          <div class="guide-title">Progress Monitoring and Reporting Guide</div>
+          <div class="guide-meta">How to read, interpret, and export student progress reports including class summaries and individual data.</div>
+          <span class="guide-badge" style="background:var(--amber-bg);color:var(--amber-dk)">PDF · Update file size here</span>
+        </div>
+        <div class="guide-actions">
+          <button class="guide-btn" style="background:var(--amber-bg);color:var(--amber)" onclick="openPdf('Progress Monitoring Guide','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+          <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+        </div>
+      </div>
+
+      <!-- ✏️ Teacher PDF 4 -->
+      <div class="guide-row">
+        <div class="guide-ico" style="background:var(--teal-bg)">🛠️</div>
+        <div class="guide-info">
+          <div class="guide-title">Troubleshooting Handbook</div>
+          <div class="guide-meta">Step-by-step solutions to common Quipper errors — login issues, missing classes, assignment visibility, and browser problems.</div>
+          <span class="guide-badge" style="background:var(--teal-bg);color:var(--teal-dk)">PDF · Update file size here</span>
+        </div>
+        <div class="guide-actions">
+          <button class="guide-btn" style="background:var(--teal-bg);color:var(--teal)" onclick="openPdf('Troubleshooting Handbook','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+          <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-bottom:14px">For Students</div>
+    <div class="guide-list">
+
+      <!-- ✏️ Student PDF 1 -->
+      <div class="guide-row">
+        <div class="guide-ico" style="background:var(--green-bg)">📘</div>
+        <div class="guide-info">
+          <div class="guide-title">Student Quick-Start Guide</div>
+          <div class="guide-meta">Visual step-by-step instructions for logging in, joining a class, and submitting your first activity.</div>
+          <span class="guide-badge" style="background:var(--green-bg);color:var(--green-dk)">PDF · Update file size here</span>
+        </div>
+        <div class="guide-actions">
+          <button class="guide-btn" style="background:var(--green-bg);color:var(--green)" onclick="openPdf('Student Quick-Start Guide','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+          <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+        </div>
+      </div>
+
+      <!-- ✏️ Student PDF 2 -->
+      <div class="guide-row">
+        <div class="guide-ico" style="background:var(--green-bg)">📱</div>
+        <div class="guide-info">
+          <div class="guide-title">Mobile Access Manual</div>
+          <div class="guide-meta">Instructions for using Quipper on smartphones and tablets — Android and iOS setup and browser tips.</div>
+          <span class="guide-badge" style="background:var(--green-bg);color:var(--green-dk)">PDF · Update file size here</span>
+        </div>
+        <div class="guide-actions">
+          <button class="guide-btn" style="background:var(--green-bg);color:var(--green)" onclick="openPdf('Mobile Access Manual','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+          <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+        </div>
+      </div>
+
+      <!-- ✏️ Student PDF 3 -->
+      <div class="guide-row">
+        <div class="guide-ico" style="background:var(--green-bg)">💻</div>
+        <div class="guide-info">
+          <div class="guide-title">Desktop Access Manual</div>
+          <div class="guide-meta">How to access Quipper on a laptop or desktop — browser settings, display issues, and troubleshooting.</div>
+          <span class="guide-badge" style="background:var(--green-bg);color:var(--green-dk)">PDF · Update file size here</span>
+        </div>
+        <div class="guide-actions">
+          <button class="guide-btn" style="background:var(--green-bg);color:var(--green)" onclick="openPdf('Desktop Access Manual','PASTE_GDRIVE_PDF_ID_HERE')">👁 Preview</button>
+          <a class="guide-btn" style="background:var(--navy);color:#fff" href="https://drive.google.com/uc?export=download&id=PASTE_GDRIVE_PDF_ID_HERE" target="_blank">⬇ Download</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /downloads -->
+
+<!-- ══════ CONTACT & HELP ══════ -->
+<div id="tab-contact" class="tab-panel">
+  <div class="section-hero">
+    <div class="section-eye" style="color:var(--purple)">Contact &amp; Help</div>
+    <div class="section-title">Get in Touch with Your CSO</div>
+    <div class="section-sub">Can't find what you need? Reach out to your regional Customer Support Officer for direct assistance.</div>
+  </div>
+  <div class="sub-content">
+    <div class="edit-hint">✏️ <strong>How to edit:</strong> Update the email address, Facebook group link, and hotline number below with your region's actual CSO contact details.</div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📧</div>
+        <div class="contact-title">Email Support</div>
+        <!-- ✏️ Replace with your actual CSO email -->
+        <div class="contact-val">support.bicol@quipper.com</div>
+        <div class="contact-note">Response within 1 business day (Mon–Fri)</div>
+        <a class="contact-link" href="mailto:support.bicol@quipper.com">Send an Email</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">💬</div>
+        <div class="contact-title">Facebook Group</div>
+        <!-- ✏️ Replace with your actual Facebook group name and URL -->
+        <div class="contact-val">Quipper Quezon–4B–Bicol</div>
+        <div class="contact-note">Community announcements, Q&amp;A, and updates</div>
+        <a class="contact-link" href="https://facebook.com/groups/PASTE_YOUR_GROUP_ID_HERE" target="_blank">Open Facebook Group</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-title">CSO Hotline</div>
+        <!-- ✏️ Replace with your actual CSO phone number -->
+        <div class="contact-val">+63 917 XXX XXXX</div>
+        <div class="contact-note">Available Mon–Fri, 8:00 AM – 5:00 PM</div>
+        <a class="contact-link" href="tel:+639170000000">Call Now</a>
+      </div>
+    </div>
+    <div class="section-label" style="margin-bottom:10px">Before contacting us — check these resources first</div>
+    <div class="shortcut-row" onclick="showTab('teacher');showSub('t','t-faq',0)"><div class="sc-dot" style="background:var(--blue)"></div><div class="sc-title">Teacher FAQs — most common questions answered</div><div class="sc-arrow">›</div></div>
+    <div class="shortcut-row" onclick="showTab('student');showSub('s','s-faq',0)"><div class="sc-dot" style="background:var(--teal)"></div><div class="sc-title">Student FAQs — quick answers for students</div><div class="sc-arrow">›</div></div>
+    <div class="shortcut-row" onclick="showTab('teacher');showSub('t','t-trouble',3)"><div class="sc-dot" style="background:var(--amber)"></div><div class="sc-title">Troubleshooting guides — step-by-step fixes</div><div class="sc-arrow">›</div></div>
+    <div class="shortcut-row" onclick="showTab('downloads')"><div class="sc-dot" style="background:var(--green)"></div><div class="sc-title">Downloads — PDF manuals and reference guides</div><div class="sc-arrow">›</div></div>
+    <div class="shortcut-row" onclick="showTab('webinar')"><div class="sc-dot" style="background:var(--coral)"></div><div class="sc-title">Webinar Recordings — watch past training sessions</div><div class="sc-arrow">›</div></div>
+  </div>
+</div><!-- /contact -->
+
+<!-- BOTTOM NAV (mobile) -->
+<div class="bottom-nav">
+  <div class="bn-item active" id="bn-home" onclick="showTab('home')"><div class="bn-icon">🏠</div><div class="bn-lbl">Home</div></div>
+  <div class="bn-item" id="bn-teacher" onclick="showTab('teacher')"><div class="bn-icon">👩‍🏫</div><div class="bn-lbl">Teachers</div></div>
+  <div class="bn-item" id="bn-student" onclick="showTab('student')"><div class="bn-icon">🎓</div><div class="bn-lbl">Students</div></div>
+  <div class="bn-item" id="bn-downloads" onclick="showTab('downloads')"><div class="bn-icon">📥</div><div class="bn-lbl">Downloads</div></div>
+  <div class="bn-item" id="bn-contact" onclick="showTab('contact')"><div class="bn-icon">📞</div><div class="bn-lbl">Contact</div></div>
+</div>
+
+</div><!-- /site -->
+
+<script>
+var TABS=['home','teacher','student','webinar','downloads','contact'];
+var subMap={t:{tabs:'t-subtabs',cls:'t-sub'},s:{tabs:'s-subtabs',cls:'s-sub'}};
+
+function showTab(name){
+  TABS.forEach(function(t){
+    var p=document.getElementById('tab-'+t); if(p) p.classList.toggle('visible',t===name);
+    var n=document.getElementById('nav-'+t); if(n) n.classList.toggle('active',t===name);
+    var m=document.getElementById('mm-'+t);  if(m) m.classList.toggle('active',t===name);
+    var b=document.getElementById('bn-'+t);  if(b) b.classList.toggle('active',t===name);
+  });
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hbg').classList.remove('open');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showSub(prefix,id,idx){
+  var map=subMap[prefix]; if(!map) return;
+  document.querySelectorAll('.'+map.cls).forEach(function(el){el.classList.toggle('visible',el.id===id);});
+  document.querySelectorAll('#'+map.tabs+' .sub-tab').forEach(function(t,i){t.classList.toggle('active',i===idx);});
+}
+
+function toggleFaq(el){el.classList.toggle('open');}
+
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hbg').classList.toggle('open');
+}
+
+/* VIDEO MODAL — Google Drive embed
+   URL format: https://drive.google.com/file/d/FILE_ID/preview
+   File must be shared: "Anyone with the link" */
+function openVideo(title,fileId,desc){
+  document.getElementById('vTitle').textContent=title;
+  document.getElementById('vDesc').textContent=desc||'Quipper CONNECT Hub · Quezon–4B–Bicol';
+  document.getElementById('vFrame').src='https://drive.google.com/file/d/'+fileId+'/preview';
+  document.getElementById('videoModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeVideo(e){
+  if(e&&e.target!==document.getElementById('videoModal')) return;
+  document.getElementById('videoModal').classList.remove('open');
+  document.getElementById('vFrame').src='';
+  document.body.style.overflow='';
+}
+
+/* PDF PREVIEW MODAL — Google Drive preview
+   Preview URL: https://drive.google.com/file/d/FILE_ID/preview
+   Download URL: https://drive.google.com/uc?export=download&id=FILE_ID
+   File must be shared: "Anyone with the link" */
+function openPdf(title,fileId){
+  document.getElementById('pTitle').textContent=title;
+  document.getElementById('pFrame').src='https://drive.google.com/file/d/'+fileId+'/preview';
+  document.getElementById('pDlLink').href='https://drive.google.com/uc?export=download&id='+fileId;
+  document.getElementById('pdfModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePdf(e){
+  if(e&&e.target!==document.getElementById('pdfModal')) return;
+  document.getElementById('pdfModal').classList.remove('open');
+  document.getElementById('pFrame').src='';
+  document.body.style.overflow='';
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeVideo();closePdf();}});
+</script>
+</body>
+</html>
